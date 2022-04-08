@@ -1,0 +1,24 @@
+
+
+  <div class="grid mt-8">
+    <div class="col-5 col-offset-4" >
+      <p-panel header="LOGIN">
+      <form class="formgroup-inline" [formGroup]="formGroup">
+        <div class="field">
+          <label for="firstname5" class="p-sr-only">usuario</label>
+          <input pInputText id="firstname5" type="text" class="inputfield" placeholder="usuario" [formControlName]="controlUser" (keyup.enter)="onSubmit()">
+        </div>
+        <div class="field">
+          <label class="p-sr-only">contraseña</label>
+          <p-password class="inputfield" placeholder="contraseña" [feedback]="false" [formControlName]="controlPassword" (keyup.enter)="onSubmit()"></p-password>
+        </div>
+        <button pButton class="button" type="button" value="Submit" (click)="onSubmit()">Ingresar</button>
+      </form>
+      </p-panel>
+    </div>
+  </div>
+
+
+
+
+

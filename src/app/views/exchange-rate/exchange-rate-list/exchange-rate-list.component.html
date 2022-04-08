@@ -1,0 +1,95 @@
+<div class="grid mt-5">
+  <div class="col-8 col-offset-2">
+    <p-panel header="BUSCAR">
+
+
+        <div class="formgrid grid">
+          <div class="field col-12 md:col-6">
+            <label class="mr-2">Moneda origen</label>
+            <p-dropdown  [style]="{'width':'300px'}" [options]="coinsAll" [(ngModel)]="selectedOriginalCurrency" optionLabel="value"></p-dropdown>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label class="mr-2">Moneda destino</label>
+            <p-dropdown  [style]="{'width':'300px'}" [options]="coinsAll" [(ngModel)]="selectedTargetCurrency" optionLabel="value"></p-dropdown>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label class="mr-7">Fecha</label>
+            <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" showButtonBar="true"></p-calendar>
+          </div>
+          <div class="field col-12 md:col-6">
+
+          </div>
+          <div class="field col-12 md:col-6">
+
+          </div>
+          <ng-template pTemplate="footer">
+            Footer content here
+          </ng-template>
+
+          <div class="field col-12 md:col-1">
+            <p-button  label="Buscar" (onClick)="search()"></p-button>
+
+          </div>
+          <div class="field col-12 md:col-2">
+            <p-button styleClass="p-button-success" label="Nuevo" (onClick)="new()"></p-button>
+          </div>
+
+
+      </div>
+
+
+    </p-panel>
+  </div>
+</div>
+<p-panel header="RESULTADO" styleClass="mt-5">
+
+  <p-table [value]="exchanges" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Moneda origen</th>
+        <th>Moneda destino</th>
+        <th>Factor de conversion</th>
+        <th>Fecha</th>
+        <th>Accion</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.originalCurrency.value}}</td>
+        <td>{{product.targetCurrency.value}}</td>
+        <td>{{product.conversionFactor}}</td>
+        <td>{{product.exchangeDate | dateFormat}}</td>
+        <td>
+          <p-button icon="pi pi-pencil" styleClass="p-button-warning" (onClick)="edit(product.id)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+</p-panel>
+
+<p-dialog [header]="headerModal" [(visible)]="showEdit" [breakpoints]="{'960px': '80vw', '640px': '100vw'}" [style]="{width: '50vw'}" [modal]="true">
+  <div class="formgrid grid mt-5">
+    <div class="field col-12 md:col-6">
+      <label class="mr-2">Moneda origen</label>
+      <p-dropdown  [editable]="isNew" appendTo="body" [style]="{'width':'300px'}" [options]="coins" [(ngModel)]="newOriginalCurrency" optionLabel="value"></p-dropdown>
+    </div>
+    <div class="field col-12 md:col-6">
+      <label class="mr-2">Moneda final</label>
+      <p-dropdown  [editable]="isNew" appendTo="body" [style]="{'width':'300px'}" [options]="coins" [(ngModel)]="newTargetCurrency" optionLabel="value"></p-dropdown>
+    </div>
+    <div class="field col-12 md:col-6">
+      <label class="mr-7">Fecha</label>
+      <p-calendar appendTo="body" [(ngModel)]="newDate" dateFormat="dd/mm/yy"></p-calendar>
+    </div>
+    <div class="field col-12 md:col-6">
+      <label class="mr-7">Factor</label>
+      <p-inputNumber [(ngModel)]="newConversionFactor" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" [label]="labelButton" styleClass="p-button-success" (onClick)="clickButton()"></p-button>
+    <p-button  (click)="showEdit=false; isEdit=false; isNew=false" label="Cerrar"></p-button>
+  </ng-template>
+</p-dialog>

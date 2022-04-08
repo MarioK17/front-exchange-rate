@@ -1,0 +1,23 @@
+
+
+<div class="grid mt-5">
+  <div class="col-8 col-offset-2">
+    <p-panel header="CALCULAR">
+      <div class="formgroup-inline">
+        <div class="field">
+          <p-dropdown [options]="coins" [(ngModel)]="selectedOriginalCurrency"  optionLabel="value"></p-dropdown>
+          <p-inputNumber [(ngModel)]="originalAmount" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+
+        </div>
+        <div class="field">
+          <p-dropdown [options]="coins" [(ngModel)]="selectedTargetCurrency" optionLabel="value"></p-dropdown>
+          <p-inputNumber disabled="true" [(ngModel)]="targetAmount" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+        </div>
+        <p-button label="Calcular" (onClick)="calculate()"></p-button>
+        <div class="field ml-5 text-pink-700">
+        <label *ngIf="notFound">No se econtro el tipo de cambio</label>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+</div>

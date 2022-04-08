@@ -1,0 +1,26 @@
+<p-panel header="RESULTADO" styleClass="mt-5">
+
+  <p-table [value]="users" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Usuario</th>
+        <th>Moneda origen</th>
+        <th>Moneda destino</th>
+        <th>Factor de conversion</th>
+        <th>Fecha</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{user.user}}</td>
+        <td>{{user.originalCurrency}}</td>
+        <td>{{user.targetCurrency}}</td>
+        <td>{{user.conversionFactor}}</td>
+        <td>{{user.dateRegister | dateFormat}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+
+</p-panel>
+
